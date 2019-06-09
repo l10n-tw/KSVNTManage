@@ -9,7 +9,7 @@
 $ sudo pacman -Sy git svn
 ```
 
-安裝完之後，就來看看《初始化》吧！
+安裝完之後，就來看看〈初始化〉吧！
 
 ## 初始化
 這款管理系統的初始化工具是 `init.sh`，你可以輸入
@@ -74,12 +74,17 @@ $ bash init.sh stable templates
 ```
 
 之後，使用附在這檔案庫的 `sync_po_file.py` 來同步 PO 檔：
+
 ```bash
 # 不可以 python3 sync_po_file.py KDE[分支]/templates/ KDE[分支]/zh_TW/
+# 每個目錄後面也一定得加斜槓 (/)，不然會出錯 QAQ
 # 這程式是我之前寫的，所以有點不符合現在需求……
 $ python3 sync_po_file.py KDE[分支]/templates/messages/ KDE[分支]/zh_TW/messages/
 # 可以不執行，畢竟我們通常都不翻文件。
 $ python3 sync_po_file.py KDE[分支]/templates/docmessages/ KDE[分支]/zh_TW/docmessages/
 ```
 
+之後，把新同步的 PO 檔翻完之後提交（或是先加 `--no-push` 提交，翻譯，再提交）。
+
+## 翻譯
 <!-- TODO: 將 https://websvn.kde.org/trunk/l10n-support/zh_TW/README.txt?revision=1538626&view=markup 也寫進來 -->
