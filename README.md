@@ -72,3 +72,14 @@ $ bash init.sh trunk templates
 # 如果你也有 clone stable…
 $ bash init.sh stable templates
 ```
+
+之後，使用附在這檔案庫的 `sync_po_file.py` 來同步 PO 檔：
+```bash
+# 不可以 python3 sync_po_file.py KDE[分支]/templates/ KDE[分支]/zh_TW/
+# 這程式是我之前寫的，所以有點不符合現在需求……
+$ python3 sync_po_file.py KDE[分支]/templates/messages/ KDE[分支]/zh_TW/messages/
+# 可以不執行，畢竟我們通常都不翻文件。
+$ python3 sync_po_file.py KDE[分支]/templates/docmessages/ KDE[分支]/zh_TW/docmessages/
+```
+
+<!-- TODO: 將 https://websvn.kde.org/trunk/l10n-support/zh_TW/README.txt?revision=1538626&view=markup 也寫進來 -->
