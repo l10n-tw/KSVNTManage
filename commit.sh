@@ -1,4 +1,4 @@
-# KDE SVN 翻譯庫 | 提交工具
+# KDE SVN 翻譯管理工具 | 提交工具
 
 # 載入函式庫
 . ./libs.sh
@@ -6,7 +6,7 @@
 # 顯示說明
 if [[ $# == 0 ]]
 then
-    echo "KDE SVN 翻譯庫 | 提交工具"
+    echo "KDE SVN 翻譯管理工具 | 提交工具"
     echo "用法：$0 [--no-push] [--msg] [分支] [語言]"
     echo ""
     echo "此工具將會提交存放於 KDE[分支]/[語言] 的檔案庫。"

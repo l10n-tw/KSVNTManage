@@ -1,4 +1,4 @@
-# KDE SVN 翻譯庫 | 初始化工具
+# KDE SVN 翻譯管理工具 | 初始化工具
 
 # 載入函式庫
 . ./libs.sh
@@ -6,7 +6,7 @@
 # 檢查參數
 if [[ $# == 0 ]] || [[ $# == "--help" ]] || [[ $# == "-h" ]]
 then
-    echo "KDE SVN 翻譯庫 | 初始化工具"
+    echo "KDE SVN 翻譯管理工具 | 初始化工具"
     echo "用法：$0 [--dev] 分支 語言"
     echo ""
     echo "預設初始化工具會將 checkout (clone) 回來的"
