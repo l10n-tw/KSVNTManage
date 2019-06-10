@@ -129,7 +129,7 @@ stable 也跟著翻譯」，Lokalize 有提供這個功能「同步翻譯」。�
 Pology 是翻譯 KDE 的神器啊！Pology 不僅能把 PO 檔裡面的過期翻譯清掉，還有其他實用的功能。
 
 #### 安裝
-最新的 Pology 存放在： <https://websvn.kde.org/trunk/l10n-support/pology/>  。
+最新的 Pology 存放在 [KDE SVN 庫](https://websvn.kde.org/trunk/l10n-support/pology/)。
 
 請使用以下方式來 clone 或更新 Pology：
 
