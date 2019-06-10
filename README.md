@@ -178,5 +178,14 @@ python2 [pology 存放目錄]/scripts/posieve.py 動作 [-s 參數] [-s 第二�
 - `unfuzzy-inplace-only`
     - 修正 HTML 標籤，並將因標籤問題而標為 fuzzy 的字串取消 fuzzy 標記。
     - 沒有參數
-<!-- MA -->
-<!-- TODO: 將 https://websvn.kde.org/trunk/l10n-support/zh_TW/README.txt?revision=1538626&view=markup 也寫進來 [1/3]-->
+
+## 聯絡我們！
+有任何關於這份文件或工具的問題，歡迎到這些地方諮詢我們：
+
+- Telegram：[@l10n-tw](https://t.me/l10n-tw)
+    - 此份文件的製作 / 貢獻者
+        - [@bystartw_tw](https://t.me/bystartw_tw), 2019.
+        - [@goodhorse](https://t.me/goodhorse), 2019.
+- E-mail
+    - 作者信箱：<pan93412@gmail.com> 
+    - 郵件論壇（雖然現在是壞的）：<l10n-tw@linux.org.tw>
