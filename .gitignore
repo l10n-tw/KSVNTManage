@@ -1,2 +1,5 @@
 KDEtrunk/
 KDEstable/
+*.lokalize
+*.lqa
+lokalize-scripts/
