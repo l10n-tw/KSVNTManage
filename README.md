@@ -1,4 +1,4 @@
-# KDE SVN 翻譯管理工具
+# KDE SVN 翻譯管理工具 及 KDE 翻譯流程說明
 嗨！感謝您選用此 KDE SVN 翻譯管理系統（KDE SVN Translation Manager - KSVNTManage）！
 這份文件會告訴您該怎麼使用這款管理系統。
 
@@ -12,13 +12,9 @@ $ sudo pacman -Sy git svn
 安裝完之後，就來看看〈初始化〉吧！
 
 ## 初始化
-這款管理系統的初始化工具是 `init.sh`，你可以輸入
-
-```bash
-$ bash init.sh
-```
-
-看看使用方式，或是看看這篇文章的說明。
+這款管理系統的初始化工具是 `init.sh`，
+你可以看看程式內附的使用方式，
+或是看看這篇文章的說明。
 
 ### KDE Developer Account 的設定
 首先，你得先弄個 KDE Developer Account (下略 DA)，如果你還沒有，
@@ -59,9 +55,10 @@ $ bash init.sh --dev trunk zh_TW
 $ bash init.sh --dev stable zh_TW
 ```
 
-這樣就 clone 完 stable 分支的 zh_TW 了。
+這樣就 clone 完 stable 分支的 zh_TW 了。我們會稱 clone 回來的目錄叫
+「 _檔案庫 (repository)_ 」。
 
-### 進階：讓自己的語言保持最新！
+### **進階**：讓自己的語言保持最新！
 因為 KDE 在把新程式的翻譯檔丟上去的時候，**並不會把所有語言都丟一遍**，只會放在 `templates`
 資料夾等你同步，所以需要同步範本才能讓自己的語言保持最新。
 
@@ -92,7 +89,9 @@ $ python3 sync_po_file.py KDE[分支]/templates/docmessages/ KDE[分支]/zh_TW/d
 [自由軟體中文化工作流程指引](https://docs.google.com/document/d/1Zs4CS_ZjN-imnImq4aEsiVYih8zkIkVZTSQim13_kYg)，
 讓整個翻譯樣式能夠一致。
 
-KDE 的翻譯檔是 PO (gettext) 格式，可以用 Poedit 甚至線上翻譯平台 Crowdin、Transifex 開起來翻譯。但 KDE 畢竟是個大專案，一個一個開 PO 檔翻譯可能會累死，因此 KDE 有提供一個非常好用的 PO 翻譯工具：Lokalize！
+KDE 的翻譯檔是 PO (gettext) 格式，可以用 Poedit 甚至線上翻譯平台 Crowdin、Transifex 開起來翻譯。
+但 KDE 畢竟是個大專案，一個一個開 PO 檔翻譯可能會累死，
+因此 KDE 有提供一個非常好用的 PO 翻譯工具：Lokalize！
 
 首先，我們先安裝 Lokalize 以及 gettext 常用的一些工具：
 
@@ -125,7 +124,7 @@ stable 也跟著翻譯」，Lokalize 有提供這個功能「同步翻譯」。�
 
 到時候，兩個分支的 PO 檔就可以互相同步了。
 
-### 進階：Pology 使用
+### **進階**：Pology 使用
 Pology 是翻譯 KDE 的神器啊！Pology 不僅能把 PO 檔裡面的過期翻譯清掉，還有其他實用的功能。
 
 #### 安裝
@@ -179,6 +178,112 @@ python2 [pology 存放目錄]/scripts/posieve.py 動作 [-s 參數] [-s 第二�
 - `unfuzzy-inplace-only`
     - 修正 HTML 標籤，並將因標籤問題而標為 fuzzy 的字串取消 fuzzy 標記。
     - 沒有參數
+
+## 檢查翻譯成果（產生差異）
+檢查翻譯成果可以在翻譯送交前找出翻譯的問題之處，減少未來的維護成本。
+這款管理工具有提供一款檢查待提交翻譯的工具 -- `diff.sh`。
+
+`diff.sh` 的功能就是「把還沒提交的變更，比較最新一個提交的內容，並得出 _差異_ 。」，
+在檢查之後，如果沒有什麼問題，就可以使用 `commit.sh` 提交，關於提交的部份請參閱
+〈送出翻譯成果（提交變更）〉。
+
+假如我翻完「trunk 分支的 zh_TW 語言」，那檢查翻譯成果的指令長這樣：
+
+```bash
+$ bash diff.sh trunk zh_TW
+```
+
+看完之後按「`q`」退出檢查介面。（如果差異極少，可能就不會跳出
+顯示差異的介面，此時就不需要按 `q`）
+
+現在設想一種情況，但假如你同時翻完好幾個分支的
+zh_TW 語言，一條一條輸入太慢，因此 `diff.sh`
+也可以「檢視所有已初始化分支某語言的差異」，作法如下：
+
+```bash
+$ bash diff.sh all [某語言]
+```
+
+all 就是「所有已初始化分支 / 語言」的意思。依此類推，
+如果要檢視「所有分支所有語言的差異」，就是 `bash diff.sh
+all all` 囉！
+
+## 送出翻譯成果（提交變更與推送）
+翻譯完、檢查完之後，肯定就是要把成果丟到上游了。
+此時我們使用管理工具的 `commit.sh` 來 _提交_ 並
+_推送_ ！
+
+### **基礎**：提交並推送到遠端
+輸入以下指令來把「trunk 分支 zh_TW 語言的變動」提交到遠端。
+
+```bash
+$ bash commit.sh trunk zh_TW
+```
+
+這工具跟 `diff.sh` 一樣，也支援 `all`，用法如下：
+
+```bash
+# 將所有分支 zh_TW 語言的變動提交到遠端
+$ bash commit.sh all zh_TW
+
+# 將所有分支所有語言的變動提交到遠端
+$ bash commit.sh all all
+```
+
+提交時會需要輸入你 ssh 的密碼（如果當初沒指定就不必），
+輸入完之後…… 噹噹！你的第一個提交就完成啦！ 🎉🎉🎉
+
+### **進階**：更多細項設定
+設想一種情況，假如我們只需要先提交
+（尤其是巨大變更，建議翻譯到一部分就先本機提交一次），
+而先不推送到遠端，那可以透過在 commit.sh 加上 `--no-push`
+選項來「先提交而不推送」。
+
+```bash
+# 只提交 trunk 分支 zh_TW 語言的變動，而不先推送
+# 選項必須先加在分支和語言前面！！
+$ bash commit.sh --no-push all zh_TW
+
+# 全部翻完之後，再一起推送……
+# NOTE: 如果沒有更動，直接輸入這個指令就是把
+#       「待推送提交」推送出去。
+$ bash commit.sh all zh_TW
+```
+
+接著我們試想另一種情況，假如我覺得預設的提交訊息
+太無聊，想改提交訊息，可以透過在 commit.sh 加上 `--msg`
+讓你能自己寫提交訊息。
+
+```bash
+# 用自訂的提交訊息提交 trunk 分支 zh_TW 語言的變動。
+$ bash commit.sh --msg all zh_TW
+
+# --no-push 也可以跟 --msg 混用……
+$ bash commit.sh --no-push --msg all zh_TW
+```
+
+## 更新檔案庫！
+某天你突然想 KDE 翻譯，而目前的檔案庫太舊…… **不要
+砍掉重練啊！** ，這款管理工具有提供 `update.sh` 能讓你
+把檔案庫更新到上游的最新狀態。
+
+用法十分簡單，語法跟 `commit.sh` `diff.sh` 很像 :)
+
+```bash
+# 更新 trunk 分支 zh_TW 語言的檔案庫
+$ bash update.sh trunk zh_TW
+
+# 更新所有分支 zh_TW 語言的檔案庫
+$ bash update.sh all zh_TW
+
+# 更新所有分支所有語言的檔案庫
+$ bash update.sh all all
+```
+
+## 🎉🎉🎉 **恭喜！** 🎉🎉🎉
+恭喜你把這篇又臭又長的說明文件看完了！
+本文件作者希望您在未來的自由軟體翻譯路上能夠順利，
+並且永保翻譯初衷！😁
 
 ## 聯絡我們！
 有任何關於這份文件或工具的問題，歡迎到這些地方諮詢我們：

@@ -93,7 +93,7 @@ upd() {
 # varlist:    $1
 diff() {
     cd $1
-    git diff
+    git diff -u15
     cd ..
 }
 
