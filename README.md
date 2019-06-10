@@ -87,4 +87,96 @@ $ python3 sync_po_file.py KDE[分支]/templates/docmessages/ KDE[分支]/zh_TW/d
 之後，把新同步的 PO 檔翻完之後提交（或是先加 `--no-push` 提交，翻譯，再提交）。
 
 ## 翻譯
-<!-- TODO: 將 https://websvn.kde.org/trunk/l10n-support/zh_TW/README.txt?revision=1538626&view=markup 也寫進來 -->
+### 怎麼翻譯？
+翻譯之前，請先閱讀
+[自由軟體中文化工作流程指引](https://docs.google.com/document/d/1Zs4CS_ZjN-imnImq4aEsiVYih8zkIkVZTSQim13_kYg)，
+讓整個翻譯樣式能夠一致。
+
+KDE 的翻譯檔是 PO (gettext) 格式，可以用 Poedit 甚至線上翻譯平台 Crowdin、Transifex 開起來翻譯。但 KDE 畢竟是個大專案，一個一個開 PO 檔翻譯可能會累死，因此 KDE 有提供一個非常好用的 PO 翻譯工具：Lokalize！
+
+首先，我們先安裝 Lokalize 以及 gettext 常用的一些工具：
+
+```bash
+# 安裝 lokalize
+$ sudo pacman -Sy lokalize
+
+# 安裝 gettext
+$ sudo pacman -Sy gettext
+```
+
+接著，就開始 Lokalize 的設定吧！
+
+### Lokalize 設定
+首先，打開 Lokalize，並按下選單列上「專案(P)」的「建立軟體翻譯專案」（每個分支都得新增一個專案）。
+
+接著會跳出「選擇要翻譯的 Gettext .po 檔放置的資料夾」檔案選擇框。
+名稱隨便你取，而目錄請放在跟這工具同位置，比較好找。
+
+接著，就會要你設定專案了。首先，為了防止重複勞動，我們通常都會希望「我翻 trunk 時，
+stable 也跟著翻譯」，Lokalize 有提供這個功能「同步翻譯」。請依照底下的說明設定：
+
+- 一般
+  - ID: 把他改成你能識別的名字，例如「KDEtrunk」「KDEstable」
+  - 郵件論壇: 把他改成「l10n-tw@linux.org.tw」或其他郵件論壇，保留原本的亦可。
+  - 根目錄: 改成你想翻譯的分支，例如 trunk 或 stable 分支。
+- 進階
+  - 分支目錄: 改成你想要同步的 PO 翻譯檔分支，例如 stable 或 trunk 分支。
+  - 其他翻譯目錄: 改成你目前的翻譯分支，例如 trunk 或 stable 分支。
+
+到時候，兩個分支的 PO 檔就可以互相同步了。
+
+### 進階：Pology 使用
+Pology 是翻譯 KDE 的神器啊！Pology 不僅能把 PO 檔裡面的過期翻譯清掉，還有其他實用的功能。
+
+#### 安裝
+最新的 Pology 存放在：<https://websvn.kde.org/trunk/l10n-support/pology/> 。
+請使用以下方式來 clone 或更新 Pology：
+
+```bash
+# clone pology
+$ git svn clone -rHEAD svn://anonsvn.kde.org/home/kde/trunk/l10n-support/pology pology
+
+# 更新 Pology
+$ cd pology
+$ git svn rebase
+## 更新完成，回到原來的 Working Directory
+$ cd ..
+```
+
+#### 工具箱
+Pology 本身就已經附送了很多實用的工具，而我們通常使用 Pology
+裡面的 posieve 居多，它使用的方法是：
+
+```bash
+# 記得先安裝 Python 2！
+sudo pacman -Sy python2
+# 用法
+python2 [pology 存放目錄]/scripts/posieve.py 動作 [-s 參數] [-s 第二個參數] [-s ...] ...
+```
+
+而常用的動作有這些：
+
+- `remove-obsolete`
+    - 移除已經過時的字串。除非過時字串真的太多，否則沒什麼必要執行。
+    - 沒有參數
+- `remove-previous`
+    - 移除無 fuzzy 標記的舊訊息。
+    - 參數
+        - `all`：移除包括 fuzzy 標記的舊訊息。
+- `normalize-header`
+    - 標準化每個 PO 檔案的檔頭，讓 PO 的檔頭一致化。
+    - 沒有參數
+- `check-kde4`
+    - 檢查每個 PO 檔案的字串，看 HTML Tag 是否對稱、內容是否有效等等。
+    - 參數
+        - `strict`：嚴格檢查模式。建議不加。
+        - `lokalize`：使用 lokalize 開啟有問題的 PO 檔，讓你比較好修正。建議加上。
+            - 注意：lokalize 必須要是開著的。
+- `unfuzzy-context-only`
+    - 將只更改翻譯備註 (context) 的 fuzzy 翻譯取消 fuzzy 標記。
+    - 沒有參數
+- `unfuzzy-inplace-only`
+    - 修正 HTML 標籤，並將因標籤問題而標為 fuzzy 的字串取消 fuzzy 標記。
+    - 沒有參數
+<!-- MA -->
+<!-- TODO: 將 https://websvn.kde.org/trunk/l10n-support/zh_TW/README.txt?revision=1538626&view=markup 也寫進來 [1/3]-->
