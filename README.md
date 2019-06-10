@@ -116,7 +116,7 @@ stable 也跟著翻譯」，Lokalize 有提供這個功能「同步翻譯」。�
 
 - 一般
   - ID: 把他改成你能識別的名字，例如「KDEtrunk」「KDEstable」
-  - 郵件論壇: 把他改成「l10n-tw@linux.org.tw」或其他郵件論壇，保留原本的亦可。
+  - 郵件論壇: 把他改成「`chinese-l10n@googlegroups.com`」或其他郵件論壇，保留原本的亦可。
   - 根目錄: 改成你想翻譯的分支，例如 trunk 或 stable 分支。
 - 進階
   - 分支目錄: 改成你想要同步的 PO 翻譯檔分支，例如 stable 或 trunk 分支。
@@ -290,4 +290,5 @@ $ bash update.sh all all
         - [@goodhorse](https://t.me/goodhorse), 2019.
 - E-mail
     - 作者信箱：<pan93412@gmail.com> 
-    - 郵件論壇（雖然現在是壞的）：<l10n-tw@linux.org.tw>
+    - 郵件論壇（雖然現在是壞的）：<chinese-l10n@googlegroups.com>
+    
