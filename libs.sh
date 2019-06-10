@@ -93,12 +93,12 @@ upd() {
 # varlist:    $1
 diff() {
     cd $1
-    git diff -u15
+    git diff -U15
     cd ..
 }
 
 # usage: invaild_arg
-# help:  顯示 "參數無效。輸入 $0 --help 取得說明。"
+# help:  顯示「參數無效」訊息。
 # varlist: 無
 invaild_arg() {
     echo "參數無效。輸入 $0 取得說明。"
