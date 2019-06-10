@@ -290,5 +290,5 @@ $ bash update.sh all all
         - [@goodhorse](https://t.me/goodhorse), 2019.
 - E-mail
     - 作者信箱：<pan93412@gmail.com> 
-    - 郵件論壇（雖然現在是壞的）：<chinese-l10n@googlegroups.com>
+    - 郵件論壇：<chinese-l10n@googlegroups.com>
     
