@@ -65,10 +65,12 @@ else
     exit 1
 fi
 
+userInputLang="$lang"
+
 for b in $branch
 do
     cd "$b"
-    if [[ $lang == "all" ]]
+    if [[ $userInputLang == "all" ]]
     then
         lang=$(find -maxdepth 1 -type d -name '*' -not -path '.')
     fi
