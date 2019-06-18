@@ -46,16 +46,19 @@ else
     exit 1
 fi
 
+userInputLang="$lang"
+
 for b in $branch
 do
     cd "$b"
-    if [[ $lang == "all" ]]
+    if [[ $userInputLang == "all" ]]
     then
         lang=$(find -maxdepth 1 -type d -name '*' -not -path '.')
     fi
     
     for l in $lang
     do
+        echoerr "正在產生 $(basename $b "./") 分支 $(basename $l "./") 語言的差異…"
         # usage: diff (dir)
         # help: 產生 SVN 庫的變動。
         diff "$l"

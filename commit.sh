@@ -77,6 +77,7 @@ do
     
     for l in $lang
     do
+        echoerr "正在提交 $(basename $b "./") 分支 的 $(basename $l "./") 語言…"
         # usage: commit (dir) (message) (option) (is_push) (is_msg)
         # help:  提交變更。
         commit "$l" "Update $(basename "${l}" "./") in $(basename "${b}" "./") to the latest." "$push" "$customMsg"

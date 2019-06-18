@@ -46,10 +46,12 @@ else
     exit 1
 fi
 
+userInputLang="$lang"
+
 for b in $branch
 do
     cd "$b"
-    if [[ $lang == "all" ]]
+    if [[ $userInputLang == "all" ]]
     then
         lang=$(find -maxdepth 1 -type d -name '*' -not -path '.')
     fi
@@ -58,6 +60,7 @@ do
     do
         # usage: upd (dir)
         # help: 更新 SVN 庫。
+        echoerr "正在更新 $(basename $b "./") 分支 的 $(basename $l "./") 語言…"
         upd "$l"
     done
     cd .. # 回去原本的 WD
