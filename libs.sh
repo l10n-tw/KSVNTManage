@@ -21,7 +21,8 @@
 # help:  將文字輸出至 stderr
 # varlist:       $@
 echoerr() {
-    echo "$@" > /dev/stderr
+    # &2 = /dev/stderr
+    echo "$@" >&2
 }
 
 ##          ##
@@ -33,11 +34,14 @@ echoerr() {
 # varlist: 無
 envcheck() {
     # git-svn 所需：git && svn
-    for prog in git svn
+    for prog in git svn msgfmt diff find
     do
-        if [[ ! -x "/usr/bin/$prog" ]] || [[ ! -s "/usr/bin/$prog" ]]
+        if [[ -x "/usr/bin/$prog" ]] && [[ -s "/usr/bin/$prog" ]]
         then
+            true # 正確
+        else
             echoerr "錯誤：未找到 $prog 程式。"
+            echoerr "請先安裝 $prog 程式後再重新啟動程式。"
             exit 1
         fi
     done
@@ -97,13 +101,20 @@ diff() {
     cd ..
 }
 
-
 # usage: invaild_arg
 # help:  顯示「參數無效」訊息。
 # varlist: 無
 invaild_arg() {
     echo "參數無效。輸入 $0 取得說明。"
     exit 1
+}
+
+# usage: noInit
+# help:  顯示「尚未初始化」訊息。
+# varlist: 無
+noInit() {
+    echoerr "尚未初始化 ${inputBranch} 分支，${lang} 語言的檔案庫。"
+    exit 2
 }
 
 ##          ##

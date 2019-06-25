@@ -61,8 +61,7 @@ if [[ -d $dir ]] || [[ "$inputBranch$lang" == "allall" ]] || [[ "$inputBranch$la
 then
     true  # 通過！
 else
-    echo "尚未初始化 ${inputBranch} 分支，${lang} 語言的檔案庫。"
-    exit 1
+    noInit # help:  顯示「尚未初始化」訊息。
 fi
 
 userInputLang="$lang"

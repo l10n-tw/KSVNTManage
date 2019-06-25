@@ -34,7 +34,7 @@ else
     branch="KDE$branch"
 fi
 
-# start commiting
+# start updating
 
 ## 判斷輸入之 branch 及 lang
 dir="${branch}/${lang}"
@@ -42,8 +42,7 @@ if [[ -d $dir ]] || [[ "$inputBranch$lang" == "allall" ]] || [[ "$inputBranch$la
 then
     true  # 通過！
 else
-    echo "尚未初始化 ${inputBranch} 分支，${lang} 語言的檔案庫。"
-    exit 1
+    noInit # help:  顯示「尚未初始化」訊息。
 fi
 
 userInputLang="$lang"
