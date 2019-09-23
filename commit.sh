@@ -13,7 +13,7 @@ then
     echo ""
     echo "[--no-push]:  不要推送至遠端。"
     echo "[--msg]:      變更預設的提交訊息。"
-    echo "              預設：Update [語言] in [分支] to the latest."
+    echo "              預設：l10n([語言]): update [分支] translations to the latest"
     echo "分支:         要提交的分支，可以是：trunk、stable 和 all（全部）。"
     echo "語言:         要提交的語言，可以是："
     echo "              https://websvn.kde.org/trunk/l10n-kf5/"
@@ -76,10 +76,12 @@ do
     
     for l in $lang
     do
-        echoerr "正在提交 $(basename $b "./") 分支 的 $(basename $l "./") 語言…"
+        lang=$(basename $l './')
+        branch_dir=$(basename $b './')
+        echoerr "正在提交 $branch_dir 分支 的 $lang 語言…"
         # usage: commit (dir) (message) (option) (is_push) (is_msg)
         # help:  提交變更。
-        commit "$l" "Update $(basename "${l}" "./") in $(basename "${b}" "./") to the latest." "$push" "$customMsg"
+        commit "$l" "l10n($lang): update ${branch_dir#KDE} translations to the latest" "$push" "$customMsg"
     done
     cd .. # 回去原本的 WD
 done
