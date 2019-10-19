@@ -196,7 +196,7 @@ def determine_translationfile(templatedir, translationdir):
                 merge_translations(templateFile, toProcessFile)
         else:
             copyPot = subprocess.Popen(
-                shlex.split(f"msginit --no-translator -o {toProcessFile} -i {templateFile}"),
+                shlex.split(f"msginit --no-translator -l zh_TW.UTF-8 -o {toProcessFile} -i {templateFile}"),
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL
             )
