@@ -23,7 +23,7 @@ fi
 for arg in $@
 do
     case $arg in
-        "--dev") 
+        "--dev")
             devAccount=1
             shift
             ;;
@@ -66,4 +66,4 @@ case $branch in
         invaild_arg
         ;;
 esac
-        
+

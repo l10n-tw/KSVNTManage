@@ -67,19 +67,19 @@ init() {
 commit() {
     cd $1
     git add -A # add all the staging file.
-    
+
     if [ "$4" == "1" ]
     then
         git commit
     else
         git commit -m "$2"
     fi
-    
+
     if [ "$3" != "0" ]
     then
         git svn dcommit
     fi
-    
+
     cd ..
 }
 

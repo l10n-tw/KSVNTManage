@@ -27,7 +27,7 @@ customMsg=0
 for arg in $@
 do
     case $arg in
-        "--no-push") 
+        "--no-push")
             push=0
             shift
             ;;
@@ -73,7 +73,7 @@ do
     then
         lang=$(find -maxdepth 1 -type d -name '*' -not -path '.')
     fi
-    
+
     for l in $lang
     do
         lang=$(basename $l './')

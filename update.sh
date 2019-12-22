@@ -54,7 +54,7 @@ do
     then
         lang=$(find -maxdepth 1 -type d -name '*' -not -path '.')
     fi
-    
+
     for l in $lang
     do
         # usage: upd (dir)

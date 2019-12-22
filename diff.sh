@@ -54,7 +54,7 @@ do
     then
         lang=$(find -maxdepth 1 -type d -name '*' -not -path '.')
     fi
-    
+
     for l in $lang
     do
         echoerr "正在產生 $(basename $b "./") 分支 $(basename $l "./") 語言的差異…"
