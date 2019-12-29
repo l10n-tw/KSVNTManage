@@ -1,6 +1,7 @@
 # KDE SVN 翻譯管理工具 | 差異工具
 
 # 載入函式庫
+LOADLIB=1
 . ./libs.sh
 
 # 顯示說明

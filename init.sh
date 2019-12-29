@@ -1,6 +1,7 @@
 # KDE SVN 翻譯管理工具 | 初始化工具
 
 # 載入函式庫
+LOADLIB=1
 . ./libs.sh
 
 # 檢查參數
