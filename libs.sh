@@ -168,9 +168,10 @@ STABLE_ANONYMOUS_REPO="svn://anonsvn.kde.org/home/kde/branches/stable/l10n-kf5"
 ##          ##
 if [ ! "$LOADLIB" == "1" ]
 then
-    error_msg "錯誤：這是函式庫，不應直接執行！"
-    info_msg  "提示：如要將此函式庫載入您的程式，請在載入前插入："
+    error_msg "這是函式庫，不應直接執行！"
+    info_msg  "如要將此函式庫載入您的程式，請在載入前插入："
     info_msg  "      LOADLIB=1"
     exit 1
 fi
+
 envcheck # 檢查環境
