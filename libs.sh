@@ -65,7 +65,7 @@ envcheck() {
             true # 正確
         else
             error_msg "錯誤：未找到 $prog 程式。"
-            error_msg "請先安裝 $prog 程式後再重新啟動程式。"
+            info_msg  "請先安裝 $prog 程式後再重新啟動程式。"
             exit 1
         fi
     done
@@ -76,7 +76,7 @@ envcheck() {
 # help:  初始化 SVN 翻譯庫 (使用 git-svn)
 # varlist:    $1    $2     $3
 init() {
-    echo "正在初始化 KDE SVN 翻譯庫：$3"
+    info_msg "正在初始化 KDE SVN 翻譯庫：$3"
     git svn clone -rHEAD $1 $2
 }
 
@@ -129,7 +129,7 @@ diff() {
 # help:  顯示「參數無效」訊息。
 # varlist: 無
 invaild_arg() {
-    echo "參數無效。輸入 $0 取得說明。"
+    error_msg "參數無效。輸入 $0 取得說明。"
     exit 1
 }
 
@@ -168,9 +168,9 @@ STABLE_ANONYMOUS_REPO="svn://anonsvn.kde.org/home/kde/branches/stable/l10n-kf5"
 ##          ##
 if [ ! "$LOADLIB" == "1" ]
 then
-    echo "錯誤：這是函式庫，不應直接執行！"
-    echo "提示：如要將此函式庫載入您的程式，請在載入前插入："
-    echo "      LOADLIB=1"
+    error_msg "錯誤：這是函式庫，不應直接執行！"
+    info_msg  "提示：如要將此函式庫載入您的程式，請在載入前插入："
+    info_msg  "      LOADLIB=1"
     exit 1
 fi
 envcheck # 檢查環境
