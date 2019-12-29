@@ -63,7 +63,7 @@ do
         cd $l
         for file in `find -name "*.po" -type f`
         do
-            echo -ne "\r\x1b[1m\x1b[36m資訊：正在檢查下述檔案：$file…       \x1b[0m" >&2
+            echo -ne "\r\x1b[36m資訊：正在檢查下述檔案：$file…       \x1b[0m" >&2
             result="`msgfmt -c -o /dev/null $file 2>&1`"
             if [[ "$result" != "" ]] && [[ "`echo $result | grep '嚴重錯誤\|fatal error'`" != "" ]]
             then
