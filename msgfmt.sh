@@ -58,7 +58,7 @@ do
 
     for l in $lang
     do
-        echoerr "正在檢查 $(basename $b "./") 分支 $(basename $l "./") 語言的格式…"
+        error_msg "正在檢查 $(basename $b "./") 分支 $(basename $l "./") 語言的格式…"
 
         cd $l
         for file in `find -name "*.po" -type f`
