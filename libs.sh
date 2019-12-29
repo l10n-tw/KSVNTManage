@@ -38,7 +38,7 @@ warn_msg() {
 # varlist:        $@
 info_msg() {
     # &2 = /dev/stderr
-    echo -e "\x1b[36m資訊：$@\x1b[0m"
+    echo -e "\x1b[96m資訊：$@\x1b[0m"
 }
 
 # usage: debug_msg (message..)
