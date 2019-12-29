@@ -17,12 +17,36 @@
 ## 底層函式 ##
 ##          ##
 
-# usage: echoerr (message..)
-# help:  將文字輸出至 stderr
-# varlist:       $@
-echoerr() {
+# usage: error_msg (message..)
+# help:  輸出「錯誤：XXX」至 stderr
+# varlist:         $@
+error_msg() {
     # &2 = /dev/stderr
-    echo "$@" >&2
+    echo -e "\x1b[1m\x1b[31m錯誤：$@\x1b[0m" >&2
+}
+
+# usage: warn_msg (message..)
+# help:  輸出「警告：XXX」至 stderr
+# varlist:        $@
+warn_msg() {
+    # &2 = /dev/stderr
+    echo -e "\x1b[1m\x1b[33m警告：$@\x1b[0m" >&2
+}
+
+# usage: info_msg (message..)
+# help:  輸出「資訊：XXX」至 stdout
+# varlist:        $@
+info_msg() {
+    # &2 = /dev/stderr
+    echo -e "\x1b[1m\x1b[36m資訊：$@\x1b[0m"
+}
+
+# usage: debug_msg (message..)
+# help:  輸出「除錯：XXX」至 stdout
+# varlist:         $@
+debug_msg() {
+    # &2 = /dev/stderr
+    echo -e "\x1b[1m\x1b[90m除錯：$@\x1b[0m"
 }
 
 ##          ##
@@ -40,12 +64,12 @@ envcheck() {
         then
             true # 正確
         else
-            echoerr "錯誤：未找到 $prog 程式。"
-            echoerr "請先安裝 $prog 程式後再重新啟動程式。"
+            error_msg "錯誤：未找到 $prog 程式。"
+            error_msg "請先安裝 $prog 程式後再重新啟動程式。"
             exit 1
         fi
     done
-    # echoerr "檢查成功：git & svn 皆存在。" # [debug]
+    # error_msg "檢查成功：git & svn 皆存在。" # [debug]
 }
 
 # usage: init (url) (path) (desc)
@@ -113,7 +137,7 @@ invaild_arg() {
 # help:  顯示「尚未初始化」訊息。
 # varlist: 無
 noInit() {
-    echoerr "尚未初始化 ${inputBranch} 分支，${lang} 語言的檔案庫。"
+    error_msg "尚未初始化 ${inputBranch} 分支，${lang} 語言的檔案庫。"
     exit 2
 }
 
