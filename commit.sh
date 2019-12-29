@@ -79,7 +79,7 @@ do
     do
         lang=$(basename $l './')
         branch_dir=$(basename $b './')
-        error_msg "正在提交 $branch_dir 分支 的 $lang 語言…"
+        info_msg "正在提交 $branch_dir 分支 的 $lang 語言…"
         # usage: commit (dir) (message) (option) (is_push) (is_msg)
         # help:  提交變更。
         commit "$l" "l10n($lang): update ${branch_dir#KDE} translations" "$push" "$customMsg"

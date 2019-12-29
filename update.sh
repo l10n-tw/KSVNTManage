@@ -60,7 +60,7 @@ do
     do
         # usage: upd (dir)
         # help: 更新 SVN 庫。
-        error_msg "正在更新 $(basename $b "./") 分支 的 $(basename $l "./") 語言…"
+        info_msg "正在更新 $(basename $b "./") 分支 的 $(basename $l "./") 語言…"
         upd "$l"
     done
     cd .. # 回去原本的 WD

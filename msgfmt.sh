@@ -58,12 +58,12 @@ do
 
     for l in $lang
     do
-        error_msg "正在檢查 $(basename $b "./") 分支 $(basename $l "./") 語言的格式…"
+        info_msg "正在檢查 $(basename $b "./") 分支 $(basename $l "./") 語言的格式…"
 
         cd $l
         for file in `find -name "*.po" -type f`
         do
-            echo -ne "\r正在檢查下述檔案：$file…       " >&2
+            echo -ne "\r\x1b[1m\x1b[36m資訊：正在檢查下述檔案：$file…       \x1b[0m" >&2
             result="`msgfmt -c -o /dev/null $file 2>&1`"
             if [[ "$result" != "" ]] && [[ "`echo $result | grep '嚴重錯誤\|fatal error'`" != "" ]]
             then
@@ -76,7 +76,7 @@ $result
 " | less
             elif [[ "$result" != "" ]]
             then
-                echo "
+                warn_msg "
 檢查的分支：$(basename $b "./")
 檢查的語言：$(basename $l "./")
 檢查的檔案：$file
